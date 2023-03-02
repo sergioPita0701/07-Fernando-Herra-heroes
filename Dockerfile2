@@ -1,0 +1,11 @@
+FROM node
+
+RUN mkdir -p /app/node_modules && chown -R node:node /app
+WORKDIR /app
+COPY package*.json ./
+USER node
+RUN yarn
+COPY --chown=node:node . .
+CMD [ "yarn", "dev","--", "--host"]
+
+EXPOSE 3000
